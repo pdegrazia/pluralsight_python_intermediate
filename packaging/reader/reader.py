@@ -7,4 +7,4 @@ class Reader(object):
         self.f.close()
 
     def read(self):
-        print(self.f.read())
+        return self.f.read()
