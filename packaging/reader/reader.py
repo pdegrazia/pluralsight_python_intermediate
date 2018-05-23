@@ -1,7 +1,19 @@
+import os
+from compressed import gzipped
+from compressed import bzipped
+
+extension_map = {
+                    '.bz2': bzipped.opener,
+                    '.gz': gzipped.opener
+                }
+
+
 class Reader(object):
     def __init__(self, filename):
         self.filename = filename
-        self.f = open(filename, 'r')
+        extension = os.path.splitext(filename)[1]
+        opener = extension_map.get(extension, open)
+        self.f = opener(filename, 'r')
 
     def close(self):
         self.f.close()
